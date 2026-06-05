@@ -3,182 +3,658 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dr. Pradhumn Singh Jadoun</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<title>Dr. Pradhumn Singh Jadoun | MBBS</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-body{
-    background:#0f1117;
-    color:white;
-    font-family:Segoe UI, sans-serif;
-}
+  :root {
+    --navy: #0a0f1e;
+    --navy-mid: #111827;
+    --navy-card: #141c2f;
+    --navy-light: #1a2540;
+    --teal: #00c9b1;
+    --teal-glow: rgba(0,201,177,0.18);
+    --teal-soft: rgba(0,201,177,0.08);
+    --gold: #e8c97a;
+    --white: #f0f4ff;
+    --muted: #8896b0;
+    --border: rgba(0,201,177,0.15);
+  }
 
-.navbar{
-    background:#111827;
-}
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
 
-.hero{
-    min-height:90vh;
-    display:flex;
-    align-items:center;
-}
+  .bg-orbs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.18; animation: drift 18s ease-in-out infinite alternate; }
+  .orb1 { width:500px; height:500px; background:var(--teal); top:-150px; right:-100px; animation-duration:20s; }
+  .orb2 { width:350px; height:350px; background:#2a5cff; bottom:10%; left:-100px; animation-duration:15s; animation-delay:-5s; }
+  .orb3 { width:250px; height:250px; background:var(--gold); top:50%; right:15%; opacity:0.10; animation-duration:22s; animation-delay:-10s; }
+  @keyframes drift { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(30px,40px) scale(1.08);} }
 
-.hero h1{
-    font-size:4rem;
-    font-weight:700;
-}
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    background: rgba(10,15,30,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+    transition: background 0.3s;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: auto; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.3px; }
+  .nav-brand span { color: var(--teal); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; letter-spacing: 0.5px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-cta { background: var(--teal); color: #0a0f1e; padding: 9px 20px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; text-decoration: none; transition: opacity 0.2s, transform 0.2s; white-space: nowrap; }
+  .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
 
-.hero span{
-    color:#00d4ff;
-}
+  .hero { min-height: 100vh; display: flex; align-items: center; position: relative; z-index: 1; padding: 120px 24px 60px; max-width: 1100px; margin: auto; }
+  .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; width: 100%; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--teal-soft); border: 1px solid var(--border); color: var(--teal); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; animation: fadeUp 0.6s ease both; }
+  .hero-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--teal); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 700; line-height: 1.15; margin-bottom: 16px; animation: fadeUp 0.6s 0.1s ease both; }
+  .hero h1 .accent { color: var(--teal); }
+  .hero .subtitle { color: var(--gold); font-size: 1.05rem; font-weight: 500; margin-bottom: 16px; letter-spacing: 0.5px; animation: fadeUp 0.6s 0.2s ease both; }
+  .hero p { color: var(--muted); line-height: 1.75; font-size: 1rem; max-width: 480px; margin-bottom: 36px; animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn-primary { background: var(--teal); color: #0a0f1e; padding: 14px 30px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; text-decoration: none; border: none; cursor: pointer; transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(0,201,177,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; box-shadow: 0 0 36px rgba(0,201,177,0.45); }
+  .btn-outline { background: transparent; color: var(--white); padding: 14px 30px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
 
-.card-custom{
-    background:#1a1f2e;
-    border:none;
-    border-radius:20px;
-    transition:0.3s;
-}
+  .hero-card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 28px; padding: 40px 36px; position: relative; overflow: hidden; animation: fadeLeft 0.7s 0.3s ease both; }
+  .hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--teal), #2a5cff); }
+  .doc-avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), #2a5cff); display: flex; align-items: center; justify-content: center; font-size: 2.4rem; margin-bottom: 20px; box-shadow: 0 0 30px rgba(0,201,177,0.35); }
+  .hero-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 4px; }
+  .hero-card .degree { color: var(--teal); font-weight: 600; font-size: 0.9rem; margin-bottom: 20px; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+  .stat-box { background: var(--navy-light); border-radius: 14px; padding: 14px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+  .stat-box .num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--teal); }
+  .stat-box .label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .availability { display: flex; align-items: center; gap: 8px; background: rgba(0,201,177,0.08); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; font-size: 0.82rem; color: var(--teal); }
+  .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; flex-shrink:0; }
 
-.card-custom:hover{
-    transform:translateY(-5px);
-}
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeLeft { from { opacity:0; transform:translateX(24px); } to { opacity:1; transform:translateX(0); } }
 
-.btn-book{
-    background:#00d4ff;
-    color:black;
-    font-weight:bold;
-    padding:12px 25px;
-    border-radius:50px;
-}
+  section { position: relative; z-index: 1; }
+  .container { max-width: 1100px; margin: auto; padding: 80px 24px; }
+  .section-header { text-align: center; margin-bottom: 56px; }
+  .section-tag { display: inline-block; color: var(--teal); font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 700; margin-bottom: 14px; }
+  .section-header p { color: var(--muted); max-width: 520px; margin: auto; line-height: 1.7; }
+  .divider { width: 56px; height: 3px; margin: 14px auto 0; background: linear-gradient(90deg, var(--teal), #2a5cff); border-radius: 2px; }
 
-.section-title{
-    text-align:center;
-    margin-bottom:50px;
-}
+  .card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+  .card:hover { transform: translateY(-6px); border-color: rgba(0,201,177,0.35); box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px rgba(0,201,177,0.08); }
+  .card-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--teal-soft); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 18px; }
+  .card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; margin-bottom: 8px; }
+  .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
 
-footer{
-    background:#111827;
-    padding:20px;
-    text-align:center;
-}
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+  .services-section { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%); }
+
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before { content: ''; position: absolute; left: 11px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--teal), transparent); }
+  .timeline-item { position: relative; margin-bottom: 36px; }
+  .timeline-dot { position: absolute; left: -32px; top: 4px; width: 22px; height: 22px; border-radius: 50%; background: var(--navy); border: 2px solid var(--teal); display: flex; align-items: center; justify-content: center; }
+  .timeline-dot::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .timeline-year { color: var(--teal); font-size: 0.78rem; font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
+  .timeline-title { font-weight: 600; margin-bottom: 4px; }
+  .timeline-sub { color: var(--muted); font-size: 0.88rem; }
+
+  .testimonial-card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 20px; padding: 28px; transition: transform 0.3s, border-color 0.3s; }
+  .testimonial-card:hover { transform: translateY(-4px); border-color: rgba(0,201,177,0.3); }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 14px; }
+  .testimonial-card p { color: #b0bec5; font-size: 0.92rem; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), #2a5cff); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #0a0f1e; flex-shrink: 0; }
+  .reviewer-name { font-weight: 600; font-size: 0.9rem; }
+  .reviewer-sub { color: var(--muted); font-size: 0.78rem; }
+
+  .appt-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 36px; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item { display: flex; gap: 14px; align-items: flex-start; background: var(--navy-card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
+  .contact-icon { width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0; background: var(--teal-soft); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .contact-item h5 { font-weight: 600; font-size: 0.88rem; margin-bottom: 3px; }
+  .contact-item p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+  .hours-grid { display: grid; gap: 8px; }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .hours-row:last-child { border: none; }
+  .hours-row .day { color: var(--muted); }
+  .hours-row .time { color: var(--teal); font-weight: 500; }
+  .hours-row .closed { color: #e05252; font-weight: 500; }
+
+  .form-card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 24px; padding: 40px; }
+  .form-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 6px; }
+  .form-card .form-sub { color: var(--muted); font-size: 0.88rem; margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; letter-spacing: 0.3px; }
+  .form-group input, .form-group select, .form-group textarea { width: 100%; background: var(--navy-light); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 13px 16px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(0,201,177,0.12); }
+  .form-group select option { background: var(--navy-mid); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .submit-btn { width: 100%; background: var(--teal); color: #0a0f1e; border: none; border-radius: 50px; padding: 15px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s; box-shadow: 0 0 24px rgba(0,201,177,0.3); margin-top: 8px; }
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 0 36px rgba(0,201,177,0.45); }
+  .success-msg { display: none; background: rgba(0,201,177,0.1); border: 1px solid var(--teal); border-radius: 12px; padding: 14px 18px; color: var(--teal); font-size: 0.9rem; margin-top: 14px; text-align: center; }
+  .error-msg { display: none; background: rgba(224,82,82,0.1); border: 1px solid #e05252; border-radius: 12px; padding: 14px 18px; color: #e05252; font-size: 0.9rem; margin-top: 14px; text-align: center; }
+
+  .banner { background: linear-gradient(135deg, rgba(0,201,177,0.12) 0%, rgba(42,92,255,0.12) 100%); border: 1px solid var(--border); border-radius: 24px; padding: 48px; text-align: center; position: relative; overflow: hidden; }
+  .banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,201,177,0.07) 0%, transparent 70%); }
+  .banner h2 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 12px; position: relative; }
+  .banner p { color: var(--muted); margin-bottom: 28px; position: relative; }
+  .banner a { position: relative; }
+
+  footer { background: var(--navy-mid); border-top: 1px solid var(--border); padding: 48px 24px 24px; position: relative; z-index: 1; }
+  .footer-inner { max-width: 1100px; margin: auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+  .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+  .footer-brand span { color: var(--teal); }
+  .footer p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+  .footer h5 { font-weight: 600; margin-bottom: 16px; font-size: 0.9rem; letter-spacing: 0.3px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--teal); }
+  .footer-bottom { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 0.82rem; color: var(--muted); flex-wrap: wrap; gap: 8px; }
+
+  .faq-item { background: var(--navy-card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .faq-item.open { border-color: rgba(0,201,177,0.3); }
+  .faq-question { width: 100%; background: transparent; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; text-align: left; }
+  .faq-arrow { color: var(--teal); font-size: 1.1rem; transition: transform 0.3s; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); }
+  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.3s; padding: 0 24px; color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+  .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s, transform 0.65s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-card { max-width: 400px; margin: auto; }
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .appt-grid { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+    .hero-btns { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
 </style>
 </head>
-
 <body>
 
-<nav class="navbar navbar-dark navbar-expand-lg">
-<div class="container">
-<a class="navbar-brand" href="#">Dr. Pradhumn Singh Jadoun</a>
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
 </div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">Dr. <span>Jadoun</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#appointment" class="nav-cta">Book Appointment</a>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
 
-<section class="hero container">
-<div>
-<h1>Dr. <span>Pradhumn Singh Jadoun</span></h1>
-
-<h3>MBBS</h3>
-
-<p class="lead">
-Dedicated medical professional with 3 years of experience
-in patient care and community healthcare.
-</p>
-
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSd5qP3aAZK3Hwbfc6ZxJo97VTyy-ada_tqZ63mgqWbf17kiFA/viewform?usp=publish-editor" 
-     target="_blank"
-     class="btn btn-book">
-Book Appointment
-</a>
+<div id="mobile-menu" style="display:none; position:fixed; top:65px; left:0; right:0; z-index:99; background:rgba(10,15,30,0.97); border-bottom:1px solid var(--border); padding:20px 24px; flex-direction:column; gap:16px;">
+  <a href="#services" onclick="toggleMenu()" style="color:var(--muted); text-decoration:none; font-size:0.95rem;">Services</a>
+  <a href="#about" onclick="toggleMenu()" style="color:var(--muted); text-decoration:none; font-size:0.95rem;">About</a>
+  <a href="#testimonials" onclick="toggleMenu()" style="color:var(--muted); text-decoration:none; font-size:0.95rem;">Reviews</a>
+  <a href="#faq" onclick="toggleMenu()" style="color:var(--muted); text-decoration:none; font-size:0.95rem;">FAQ</a>
+  <a href="#appointment" onclick="toggleMenu()" class="btn-primary" style="text-align:center; margin-top:4px;">Book Appointment</a>
 </div>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Available for Consultation</div>
+        <h1>Dr. <span class="accent">Pradhumn<br>Singh Jadoun</span></h1>
+        <div class="subtitle">MBBS · General Medicine &amp; Community Health</div>
+        <p>Compassionate, evidence-based medical care for every patient. Committed to preventive medicine and healthier communities — one family at a time.</p>
+        <div class="hero-btns">
+          <a href="#appointment" class="btn-primary">Book Appointment</a>
+          <a href="#about" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+      <div>
+        <div class="hero-card">
+          <div class="doc-avatar">👨‍⚕️</div>
+          <h3>Dr. Pradhumn Singh Jadoun</h3>
+          <div class="degree">MBBS · General Physician</div>
+          <div class="stat-row">
+            <div class="stat-box"><div class="num">3+</div><div class="label">Years Experience</div></div>
+            <div class="stat-box"><div class="num">500+</div><div class="label">Patients Treated</div></div>
+            <div class="stat-box"><div class="num">100%</div><div class="label">Commitment</div></div>
+            <div class="stat-box"><div class="num">∞</div><div class="label">Compassion</div></div>
+          </div>
+          <div class="availability">
+            <div class="avail-dot"></div>
+            Currently accepting new patients
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="container py-5">
-
-<h2 class="section-title">Professional Profile</h2>
-
-<div class="row g-4">
-
-<div class="col-md-4">
-<div class="card card-custom p-4">
-<h4>Qualification</h4>
-<p>MBBS</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card card-custom p-4">
-<h4>Experience</h4>
-<p>3 Years</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card card-custom p-4">
-<h4>Special Focus</h4>
-<p>General Medicine & Community Health</p>
-</div>
-</div>
-
-</div>
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">What I Offer</div>
+      <h2>Medical Services</h2>
+      <p>Comprehensive primary care services tailored to your individual health needs.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <div class="card-icon">🩺</div>
+        <h4>General Consultation</h4>
+        <p>Diagnosis and treatment of common illnesses, chronic conditions, and routine health concerns with a patient-first approach.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🛡️</div>
+        <h4>Preventive Care</h4>
+        <p>Health screenings, vaccinations, lifestyle counseling, and annual check-ups to keep you healthy before problems arise.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🏘️</div>
+        <h4>Community Health</h4>
+        <p>Outreach programs, health education, and accessible care for underserved communities and rural populations.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">💊</div>
+        <h4>Medication Management</h4>
+        <p>Careful prescription management, medication reviews, and adherence support to optimize treatment outcomes.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">👶</div>
+        <h4>Child &amp; Family Health</h4>
+        <p>Pediatric care, family wellness consultations, and guidance for parents on nutrition, growth, and development.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🧠</div>
+        <h4>Mental Wellness Support</h4>
+        <p>Stress management guidance, mental health screening, and referral support for holistic well-being.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section class="container py-5">
-
-<h2 class="section-title">About Doctor</h2>
-
-<div class="card card-custom p-4">
-<p>
-Dr. Pradhumn Singh Jadoun is committed to delivering
-quality healthcare, promoting preventive medicine,
-and supporting community well-being through
-professional and compassionate medical care.
-</p>
-</div>
-
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="grid-2" style="align-items:start; gap:48px;">
+      <div class="reveal">
+        <div class="section-tag">About Doctor</div>
+        <h2 style="font-family:'Playfair Display',serif; font-size:2rem; margin-bottom:18px; margin-top:10px;">Dedicated to<br><span style="color:var(--teal);">Your Well-being</span></h2>
+        <p style="color:var(--muted); line-height:1.8; margin-bottom:18px;">Dr. Pradhumn Singh Jadoun is a committed medical professional who believes healthcare is a fundamental right, not a privilege. With a strong foundation in general medicine and a passion for community health, he strives to provide compassionate, evidence-based care to every patient.</p>
+        <p style="color:var(--muted); line-height:1.8; margin-bottom:28px;">His approach integrates modern medical science with a deep understanding of the social and environmental factors that shape health outcomes — ensuring every patient feels heard, respected, and empowered.</p>
+        <div class="grid-2" style="gap:16px;">
+          <div style="background:var(--navy-card); border:1px solid var(--border); border-radius:14px; padding:18px;">
+            <div style="color:var(--teal); font-size:1.4rem; margin-bottom:6px;">🎓</div>
+            <div style="font-weight:600; font-size:0.9rem; margin-bottom:4px;">Education</div>
+            <div style="color:var(--muted); font-size:0.82rem;">MBBS — Medical Graduate</div>
+          </div>
+          <div style="background:var(--navy-card); border:1px solid var(--border); border-radius:14px; padding:18px;">
+            <div style="color:var(--teal); font-size:1.4rem; margin-bottom:6px;">🌐</div>
+            <div style="font-weight:600; font-size:0.9rem; margin-bottom:4px;">Languages</div>
+            <div style="color:var(--muted); font-size:0.82rem;">Hindi, English</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div style="background:var(--navy-card); border:1px solid var(--border); border-radius:24px; padding:36px;">
+          <h4 style="font-family:'Playfair Display',serif; margin-bottom:28px; font-size:1.2rem;">Professional Journey</h4>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">2023 – 2024</div>
+              <div class="timeline-title">Medical Internship</div>
+              <div class="timeline-sub">Rotational training across major clinical departments including surgery, medicine, paediatrics, and OB/GYN.</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-year">2024 – Present</div>
+              <div class="timeline-title"> Medical Officer</div>
+              <div class="timeline-sub">Served as M.O. at a  health centre, handling OPD, emergency care, and health camps.</div>
+            </div>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<section id="appointment" class="container py-5">
-
-<h2 class="section-title">Book Appointment</h2>
-
-<div class="card card-custom p-4">
-
-<form>
-
-<div class="mb-3">
-<input type="text" class="form-control"
-placeholder="Full Name">
-</div>
-
-<div class="mb-3">
-<input type="email" class="form-control"
-placeholder="Email Address">
-</div>
-
-<div class="mb-3">
-<input type="tel" class="form-control"
-placeholder="Phone Number">
-</div>
-
-<div class="mb-3">
-<input type="date" class="form-control">
-</div>
-
-<button type="submit"
-class="btn btn-book">
-Request Appointment
-</button>
-
-</form>
-
-</div>
-
+<!-- TESTIMONIALS -->
+<section id="testimonials" style="background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Patient Reviews</div>
+      <h2>What Patients Say</h2>
+      <p>Real feedback from real patients — their health is our greatest achievement.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Dr. Jadoun took the time to truly understand my concerns. He is patient, thorough, and genuinely caring. I feel in safe hands every visit."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">R</div>
+          <div><div class="reviewer-name">Ramesh Sharma</div><div class="reviewer-sub">Patient since 2022</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Excellent doctor with great communication skills. He explained everything clearly and the follow-up care was outstanding."</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">S</div>
+          <div><div class="reviewer-name">Sunita Patel</div><div class="reviewer-sub">Patient since 2023</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Very professional and kind. He diagnosed my condition quickly and the prescribed treatment worked wonderfully. Highly recommended!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">A</div>
+          <div><div class="reviewer-name">Arvind Mehta</div><div class="reviewer-sub">Patient since 2023</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Common Questions</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Quick answers to common queries about consultations and care.</p>
+      <div class="divider"></div>
+    </div>
+    <div style="max-width: 720px; margin: auto;">
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">What should I bring to my first appointment?<span class="faq-arrow">+</span></button>
+        <div class="faq-answer">Please bring a valid photo ID, any previous medical records, a list of current medications, and your insurance card if applicable. Arriving 10 minutes early helps us serve you better.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">Are online or teleconsultations available?<span class="faq-arrow">+</span></button>
+        <div class="faq-answer">Yes, teleconsultations are available for follow-up visits and minor concerns. Contact the clinic to schedule a video or phone consultation at a convenient time.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">What are the consultation fees?<span class="faq-arrow">+</span></button>
+        <div class="faq-answer">Consultation fees vary by the type and duration of visit. Please call the clinic directly for the most accurate fee information. Affordable options are available for patients in need.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">How do I get a prescription refill?<span class="faq-arrow">+</span></button>
+        <div class="faq-answer">Prescription refills can be requested by calling the clinic or via a brief follow-up consultation. Please allow 24–48 hours for processing. Request refills at least 5 days before your medication runs out.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">Do you handle medical emergencies?<span class="faq-arrow">+</span></button>
+        <div class="faq-answer">For life-threatening emergencies, please call 112 or go directly to your nearest emergency room. The clinic handles urgent but non-life-threatening conditions during working hours with priority slots.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="appointment" style="background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Schedule a Visit</div>
+      <h2>Book an Appointment</h2>
+      <p>Fill in the form and the clinic will confirm your appointment within 2 hours.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="appt-grid">
+      <div class="reveal">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div><h5>Clinic Location</h5><p>Please contact us directly for the clinic address and directions.</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div><h5>Phone - +</h5><p>Call us to book or for urgent queries</p></div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div><h5>Email</h5><p>Contact the clinic for email details</p></div>
+          </div>
+          <div class="contact-item" style="flex-direction:column;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+              <div class="contact-icon">🕐</div>
+              <h5 style="margin:0;">Clinic Hours</h5>
+            </div>
+            <div class="hours-grid">
+              <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">9:00 AM – 6:00 PM</span></div>
+              <div class="hours-row"><span class="day">Saturday</span><span class="time">9:00 AM – 2:00 PM</span></div>
+              <div class="hours-row"><span class="day">Sunday</span><span class="closed">Closed</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM WITH FORMSPREE -->
+      <div class="form-card reveal">
+        <h3>Request an Appointment</h3>
+        <p class="form-sub">We'll confirm your booking within 24 hours of receiving your request.</p>
+        <form id="appt-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="First Name" id="fname" placeholder="Ramesh" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="Last Name" id="lname" placeholder="Sharma" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="Email" id="email" placeholder="ramesh@email.com" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="Phone" id="phone" placeholder="+91 98765 43210" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Preferred Date</label>
+              <input type="date" name="Preferred Date" id="appt-date" required>
+            </div>
+            <div class="form-group">
+              <label>Preferred Time</label>
+              <select name="Preferred Time" id="appt-time" required>
+                <option value="">Select time slot</option>
+                <option>9:00 AM – 10:00 AM</option>
+                <option>10:00 AM – 11:00 AM</option>
+                <option>11:00 AM – 12:00 PM</option>
+                <option>2:00 PM – 3:00 PM</option>
+                <option>3:00 PM – 4:00 PM</option>
+                <option>4:00 PM – 5:00 PM</option>
+                <option>5:00 PM – 6:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Type of Visit</label>
+            <select name="Visit Type" id="visit-type" required>
+              <option value="">Select type</option>
+              <option>General Consultation</option>
+              <option>Preventive Check-up</option>
+              <option>Follow-up Visit</option>
+              <option>Child / Family Health</option>
+              <option>Mental Wellness Support</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Symptoms / Additional Notes</label>
+            <textarea name="Notes" id="notes" placeholder="Briefly describe your symptoms or any relevant medical history…"></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">Request Appointment →</button>
+          <div class="success-msg" id="success-msg">✓ Appointment request received! We'll confirm within 24 hours.</div>
+          <div class="error-msg" id="error-msg">✗ Something went wrong. Please try again.</div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section>
+  <div class="container" style="padding-top: 20px; padding-bottom: 80px;">
+    <div class="banner reveal">
+      <h2>Your Health is Our Priority</h2>
+      <p>Don't wait until you're unwell — schedule a preventive check-up today.</p>
+      <a href="#appointment" class="btn-primary">Get Started Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-© 2026 Dr. Pradhumn Singh Jadoun | MBBS
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Dr. <span>Pradhumn Singh Jadoun</span></div>
+      <p>MBBS · General Practitioner<br>Committed to compassionate, evidence-based healthcare for every individual and community.</p>
+    </div>
+    <div>
+      <h5>Quick Links</h5>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#appointment">Book Appointment</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Services</h5>
+      <ul class="footer-links">
+        <li><a href="#">General Consultation</a></li>
+        <li><a href="#">Preventive Care</a></li>
+        <li><a href="#">Community Health</a></li>
+        <li><a href="#">Child & Family Health</a></li>
+        <li><a href="#">Mental Wellness</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Dr. Pradhumn Singh Jadoun | MBBS. All rights reserved.</span>
+    <span>Designed with care 🩺</span>
+  </div>
 </footer>
 
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.background = window.scrollY > 60 ? 'rgba(10,15,30,0.95)' : 'rgba(10,15,30,0.7)';
+  });
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Mobile menu
+  function toggleMenu() {
+    const m = document.getElementById('mobile-menu');
+    m.style.display = m.style.display === 'flex' ? 'none' : 'flex';
+  }
+
+  // Min date
+  document.getElementById('appt-date').setAttribute('min', new Date().toISOString().split('T')[0]);
+
+  // ── FORMSPREE SUBMIT ──
+  document.getElementById('appt-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('success-msg');
+    const errorMsg = document.getElementById('error-msg');
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    try {
+      const response = await fetch('https://formspree.io/f/xqeoeqjb', { 
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        successMsg.style.display = 'block';
+        btn.textContent = '✓ Request Sent';
+        btn.style.background = '#1de9b6';
+        this.reset();
+        setTimeout(() => {
+          successMsg.style.display = 'none';
+          btn.textContent = 'Request Appointment →';
+          btn.style.background = 'var(--teal)';
+          btn.disabled = false;
+        }, 5000);
+      } else {
+        errorMsg.style.display = 'block';
+        btn.textContent = 'Request Appointment →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      errorMsg.style.display = 'block';
+      btn.textContent = 'Request Appointment →';
+      btn.disabled = false;
+    }
+  });
+</script>
 </body>
 </html>
